@@ -5,9 +5,6 @@ A Telcoflow + Gemini Live agent that conducts a structured phone screening
 interview, collecting data across 5 phases via function calling, then
 evaluating the candidate post-call.
 
-Equivalent to a LiveKit AgentTask/TaskGroup workflow, but built entirely on
-Telcoflow SDK (telephony) + Gemini Live (native audio + function calling).
-
 Phases:
   1. Introduction   → record_intro
   2. Contact Info   → record_contact

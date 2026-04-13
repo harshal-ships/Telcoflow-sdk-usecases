@@ -2,19 +2,6 @@
 
 A production voice agent that conducts structured phone screening interviews using **Telcoflow SDK** (telephony) + **Gemini Live** (native audio + function calling).
 
-## Architecture Pattern: LiveKit → Telcoflow Translation
-
-| LiveKit Concept | Telcoflow + Gemini Live Equivalent |
-|---|---|
-| `AgentTask` | Phase in the system instruction + dedicated tool declarations |
-| `TaskGroup` | `PhaseTracker` class that monitors tool call completions |
-| `@function_tool()` | Gemini Live function declarations + `send_tool_response()` |
-| `session.generate_reply()` | Gemini natively generates audio responses |
-| `AgentSession(stt=..., tts=...)` | Not needed — Gemini Live is native audio end-to-end |
-| `session.shutdown()` | `call.disconnect()` via Telcoflow |
-| `session.userdata` | `PhaseTracker` dataclass stores all collected data |
-| `AgentServer / @rtc_session` | `TelcoflowClient / @client.on(INCOMING_CALL)` |
-
 ## Interview Phases
 
 ```
