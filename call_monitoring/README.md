@@ -56,7 +56,7 @@ python agent.py
 Output:
 
 ```
-2026-04-10 10:00:00  call_monitoring              INFO   CallMonitor [XanhSM] is live — waiting for calls …
+2026-04-10 10:00:00  call_monitoring              INFO   CallMonitor [YOUR_COMPANY_NAME] is live — waiting for calls …
 ```
 
 ## Sample Monitoring Flow
@@ -103,7 +103,7 @@ Customer:  "Thank you, that's all I needed."
 | `GEMINI_API_KEY` | *required* | Google API key |
 | `WSS_API_KEY` | *required* | Telcoflow API key |
 | `WSS_CONNECTOR_UUID` | *required* | Telcoflow connector UUID |
-| `BUSINESS_NAME` | XanhSM | Company name |
+| `BUSINESS_NAME` | YOUR_COMPANY_NAME | Company name |
 | `DB_PATH` | `call_monitoring.db` | SQLite database path |
 | `GEMINI_MODEL` | `gemini-2.5-flash-native-audio-preview-12-2025` | Gemini Live model |
 | `SAMPLE_RATE` | 24000 | Audio sample rate (Hz) |

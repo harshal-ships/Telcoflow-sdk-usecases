@@ -41,7 +41,7 @@ logger = logging.getLogger("receptionist_agent")
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 WSS_API_KEY = os.environ["WSS_API_KEY"]
 WSS_CONNECTOR_UUID = os.environ["WSS_CONNECTOR_UUID"]
-BUSINESS_NAME = os.getenv("BUSINESS_NAME", "XanhSM")
+BUSINESS_NAME = os.getenv("BUSINESS_NAME", "YOUR_COMPANY_NAME")
 DB_PATH = os.getenv("DB_PATH", "receptionist.db")
 GEMINI_MODEL = os.getenv(
     "GEMINI_MODEL", "gemini-2.5-flash-native-audio-preview-12-2025"

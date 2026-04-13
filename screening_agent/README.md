@@ -73,13 +73,13 @@ python agent.py
 Output:
 
 ```
-2026-04-09 10:00:00  screening_agent            INFO   ScreeningAgent [XanhSM — Customer Service Representative] is live — waiting for calls …
+2026-04-09 10:00:00  screening_agent            INFO   ScreeningAgent [YOUR_COMPANY_NAME — Customer Service Representative] is live — waiting for calls …
 ```
 
 ## Sample Call Flow
 
 ```
-Alex:       "Hi, this is Alex from XanhSM. Thank you for taking the time
+Alex:       "Hi, this is Alex from YOUR_COMPANY_NAME. Thank you for taking the time
              to speak with me today. Could you start by introducing yourself?"
 Candidate:  "Sure, I'm Sarah Chen. I've been in customer service for about 5 years..."
              → record_intro(name="Sarah Chen", intro_notes="5 years in CS...")
@@ -133,5 +133,5 @@ Alex:       "Thank you Sarah! We'll be in touch within 3 business days. Goodbye!
 | `GEMINI_LIVE_MODEL` | `gemini-2.5-flash-native-audio-preview-12-2025` | Model for voice |
 | `GEMINI_TEXT_MODEL` | `gemini-2.5-flash` | Model for post-call evaluation |
 | `SCREENING_POSITION` | Customer Service Representative | Job title |
-| `SCREENING_COMPANY` | XanhSM | Company name |
+| `SCREENING_COMPANY` | YOUR_COMPANY_NAME | Company name |
 | `RESULTS_CSV` | `screening_results.csv` | Output CSV path |

@@ -87,7 +87,7 @@ class TwilioConfig:
 @dataclass(frozen=True)
 class BusinessConfig:
     """Configurable business rules for appointment scheduling."""
-    name: str = "XanhSM Clinic"
+    name: str = "YOUR_COMPANY_NAME Clinic"
     open_hour: int = 9
     close_hour: int = 17
     slot_duration_minutes: int = 30

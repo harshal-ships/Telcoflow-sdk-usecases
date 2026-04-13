@@ -53,7 +53,7 @@ logger = logging.getLogger("smart_ivr")
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-native-audio-preview-12-2025")
 SAMPLE_RATE = int(os.getenv("SAMPLE_RATE", "24000"))
-COMPANY = os.getenv("BUSINESS_NAME", "XanhSM")
+COMPANY = os.getenv("BUSINESS_NAME", "YOUR_COMPANY_NAME")
 DB_PATH = os.getenv("DB_PATH", "ivr.db")
 
 # ---------------------------------------------------------------------------

@@ -11,7 +11,7 @@ Traditional IVR systems are:
 - Slow (30-60 seconds navigating menus before reaching anyone)
 - Expensive to maintain (every menu change requires reconfiguration)
 
-This agent replaces all of that with: **"Hi, welcome to XanhSM! How can I help you today?"**
+This agent replaces all of that with: **"Hi, welcome to YOUR_COMPANY_NAME! How can I help you today?"**
 
 ## What It Can Do
 
@@ -85,14 +85,14 @@ python agent.py
 ```
 
 ```
-2026-04-09 10:00:00  smart_ivr                 INFO   Smart IVR [XanhSM] is live — no menus, just talk — waiting for calls …
+2026-04-09 10:00:00  smart_ivr                 INFO   Smart IVR [YOUR_COMPANY_NAME] is live — no menus, just talk — waiting for calls …
 ```
 
 ## Sample Conversations
 
 ### Account check (AI-handled)
 ```
-AI:     "Hi, welcome to XanhSM! How can I help you today?"
+AI:     "Hi, welcome to YOUR_COMPANY_NAME! How can I help you today?"
 Caller: "What's my account balance?"
 AI:     → check_account_status(phone="+6591234567")
 AI:     "Hi Alice! You're on the premium plan with a balance of $142.50."
@@ -102,7 +102,7 @@ AI:     → end_call(summary="Account balance inquiry")
 
 ### Order tracking (AI-handled)
 ```
-AI:     "Hi, welcome to XanhSM! How can I help?"
+AI:     "Hi, welcome to YOUR_COMPANY_NAME! How can I help?"
 Caller: "Where's my order?"
 AI:     → check_orders(phone="+6591234567")
 AI:     "You have two orders: your Wireless Router Pro X has shipped and
@@ -145,7 +145,7 @@ The database ships with 3 customers and 4 orders:
 | `GEMINI_API_KEY` | *required* | Google API key |
 | `WSS_API_KEY` | *required* | Telcoflow API key |
 | `WSS_CONNECTOR_UUID` | *required* | Telcoflow connector UUID |
-| `BUSINESS_NAME` | `XanhSM` | Company name used in greetings |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME` | Company name used in greetings |
 | `DB_PATH` | `ivr.db` | SQLite database path |
 
 ## vs Traditional IVR

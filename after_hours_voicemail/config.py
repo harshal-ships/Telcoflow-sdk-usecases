@@ -86,7 +86,7 @@ class SlackConfig:
 
 @dataclass(frozen=True)
 class BusinessHoursConfig:
-    name: str = "XanhSM"
+    name: str = "YOUR_COMPANY_NAME"
     timezone: str = "Asia/Singapore"
     open_hour: int = 9
     close_hour: int = 17

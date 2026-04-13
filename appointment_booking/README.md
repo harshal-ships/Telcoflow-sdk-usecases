@@ -86,7 +86,7 @@ python appointment_agent.py
 Output:
 
 ```
-2026-04-09 10:00:00  appointment_agent         INFO   AppointmentBot [XanhSM Clinic] is live — sandbox mode — waiting for calls …
+2026-04-09 10:00:00  appointment_agent         INFO   AppointmentBot [YOUR_COMPANY_NAME Clinic] is live — sandbox mode — waiting for calls …
 ```
 
 ## Gemini Tools
@@ -113,7 +113,7 @@ All values are set via environment variables (see `.env.example`):
 | `TWILIO_ACCOUNT_SID` | — | Twilio SID (optional) |
 | `TWILIO_AUTH_TOKEN` | — | Twilio token (optional) |
 | `TWILIO_FROM_NUMBER` | — | Twilio sender number (optional) |
-| `BUSINESS_NAME` | `XanhSM Clinic` | Your business name |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME Clinic` | Your business name |
 | `BUSINESS_OPEN_HOUR` | `9` | Opening hour (24h) |
 | `BUSINESS_CLOSE_HOUR` | `17` | Closing hour (24h) |
 | `BUSINESS_SLOT_MINUTES` | `30` | Slot duration in minutes |

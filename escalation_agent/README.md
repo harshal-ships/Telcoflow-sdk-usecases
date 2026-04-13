@@ -55,7 +55,7 @@ python agent.py
 Output:
 
 ```
-2026-04-10 10:00:00  escalation_agent           INFO   EscalationAgent [XanhSM] is live — waiting for calls …
+2026-04-10 10:00:00  escalation_agent           INFO   EscalationAgent [YOUR_COMPANY_NAME] is live — waiting for calls …
 ```
 
 ## Sample Call Flow
@@ -63,7 +63,7 @@ Output:
 ### AI-Resolved Call
 
 ```
-AI:      "Thank you for calling XanhSM. How can I help you today?"
+AI:      "Thank you for calling YOUR_COMPANY_NAME. How can I help you today?"
 Caller:  "What are your business hours?"
 AI:      "Our office is open Monday through Friday, 9 AM to 5 PM Singapore time.
           Is there anything else I can help you with?"
@@ -75,7 +75,7 @@ AI:      "You're welcome! Have a great day. Goodbye."
 ### Escalated Call
 
 ```
-AI:      "Thank you for calling XanhSM. How can I help you today?"
+AI:      "Thank you for calling YOUR_COMPANY_NAME. How can I help you today?"
 Caller:  "I need to dispute a charge on my last invoice."
 AI:      "I understand. Could you tell me more about which charge you'd like to dispute?"
 Caller:  "There's a $50 fee I wasn't expecting."
@@ -95,7 +95,7 @@ AI:      "I see. Billing disputes require account access that I don't have.
 | `WSS_API_KEY` | *required* | Telcoflow API key |
 | `WSS_CONNECTOR_UUID` | *required* | Telcoflow connector UUID |
 | `GEMINI_MODEL` | `gemini-2.5-flash-native-audio-preview-12-2025` | Gemini Live model |
-| `BUSINESS_NAME` | `XanhSM` | Company name used in the AI greeting |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME` | Company name used in the AI greeting |
 | `DB_PATH` | `escalation.db` | SQLite database path |
 | `SAMPLE_RATE` | `24000` | Audio sample rate (Hz) |
 

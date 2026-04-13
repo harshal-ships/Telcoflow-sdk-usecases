@@ -77,13 +77,13 @@ Output:
 
 ```
 2026-04-10 10:00:00  notification_agent         INFO   NotificationDB ready at notifications.db
-2026-04-10 10:00:00  notification_agent         INFO   NotificationAgent [XanhSM] is live — waiting for calls …
+2026-04-10 10:00:00  notification_agent         INFO   NotificationAgent [YOUR_COMPANY_NAME] is live — waiting for calls …
 ```
 
 ## Sample Call Flow
 
 ```
-Agent:   "Hello Alice, this is the notification assistant for XanhSM.
+Agent:   "Hello Alice, this is the notification assistant for YOUR_COMPANY_NAME.
           You have 3 pending notifications."
 
 Agent:   "Notification 1: Your annual account review is due by April 30.
@@ -127,7 +127,7 @@ The database auto-seeds on first run with 3 customers and 8 pending notification
 | `GEMINI_API_KEY` | *required* | Google API key with Gemini Live access |
 | `WSS_API_KEY` | *required* | Telcoflow API key |
 | `WSS_CONNECTOR_UUID` | *required* | Telcoflow connector UUID |
-| `BUSINESS_NAME` | `XanhSM` | Your business name (used in greetings) |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME` | Your business name (used in greetings) |
 | `DB_PATH` | `notifications.db` | SQLite database file path |
 
 ## Tools

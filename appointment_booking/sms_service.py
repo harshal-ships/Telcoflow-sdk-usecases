@@ -43,7 +43,7 @@ class SMSService:
         service: str,
         date: str,
         time: str,
-        business_name: str = "XanhSM Clinic",
+        business_name: str = "YOUR_COMPANY_NAME Clinic",
     ) -> dict:
         body = (
             f"Hi! Your {service} appointment at {business_name} is confirmed "

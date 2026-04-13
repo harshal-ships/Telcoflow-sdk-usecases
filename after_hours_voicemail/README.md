@@ -97,7 +97,7 @@ python voicemail_agent.py
 Output:
 
 ```
-2026-04-09 18:00:00  voicemail_agent            INFO   VoicemailBot [XanhSM] is live — hours 9:00–17:00 Asia/Singapore — waiting for calls …
+2026-04-09 18:00:00  voicemail_agent            INFO   VoicemailBot [YOUR_COMPANY_NAME] is live — hours 9:00–17:00 Asia/Singapore — waiting for calls …
 ```
 
 ## Configuration Reference
@@ -113,7 +113,7 @@ Output:
 | `NOVA_SONIC_MODEL_ID` | `amazon.nova-2-sonic-v1:0` | Nova Sonic model ID |
 | `SLACK_WEBHOOK_URL` | — | Slack incoming webhook URL (optional) |
 | `SLACK_CHANNEL` | `#incoming-calls` | Slack channel override |
-| `BUSINESS_NAME` | `XanhSM` | Your business name |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME` | Your business name |
 | `BUSINESS_TIMEZONE` | `Asia/Singapore` | IANA timezone for business hours |
 | `BUSINESS_OPEN_HOUR` | `9` | Opening hour (24h) |
 | `BUSINESS_CLOSE_HOUR` | `17` | Closing hour (24h) |

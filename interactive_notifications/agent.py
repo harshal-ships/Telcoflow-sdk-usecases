@@ -54,7 +54,7 @@ def _require(name: str) -> str:
 GEMINI_API_KEY = lambda: _require("GEMINI_API_KEY")  # noqa: E731
 WSS_API_KEY = lambda: _require("WSS_API_KEY")  # noqa: E731
 WSS_CONNECTOR_UUID = lambda: _require("WSS_CONNECTOR_UUID")  # noqa: E731
-BUSINESS_NAME = lambda: os.getenv("BUSINESS_NAME", "XanhSM")  # noqa: E731
+BUSINESS_NAME = lambda: os.getenv("BUSINESS_NAME", "YOUR_COMPANY_NAME")  # noqa: E731
 DB_PATH = lambda: os.getenv("DB_PATH", "notifications.db")  # noqa: E731
 GEMINI_MODEL = "gemini-2.5-flash-native-audio-preview-12-2025"
 SAMPLE_RATE = 24000

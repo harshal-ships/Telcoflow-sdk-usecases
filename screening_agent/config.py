@@ -54,7 +54,7 @@ class TelcoflowConfig:
 @dataclass(frozen=True)
 class ScreeningConfig:
     position: str = "Customer Service Representative"
-    company: str = "XanhSM"
+    company: str = "YOUR_COMPANY_NAME"
     results_csv: str = "screening_results.csv"
 
     @classmethod

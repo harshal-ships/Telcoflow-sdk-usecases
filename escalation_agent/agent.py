@@ -50,7 +50,7 @@ def _require(name: str) -> str:
 GEMINI_API_KEY = _require("GEMINI_API_KEY")
 WSS_API_KEY = _require("WSS_API_KEY")
 WSS_CONNECTOR_UUID = _require("WSS_CONNECTOR_UUID")
-BUSINESS_NAME = os.getenv("BUSINESS_NAME", "XanhSM")
+BUSINESS_NAME = os.getenv("BUSINESS_NAME", "YOUR_COMPANY_NAME")
 DB_PATH = os.getenv("DB_PATH", "escalation.db")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-native-audio-preview-12-2025")
 SAMPLE_RATE = int(os.getenv("SAMPLE_RATE", "24000"))

@@ -90,7 +90,7 @@ Output:
 
 ```
 2026-04-10 10:00:00  receptionist_agent          INFO   ReceptionistDB ready at receptionist.db
-2026-04-10 10:00:00  receptionist_agent          INFO   ReceptionistAgent [XanhSM] is live — waiting for calls …
+2026-04-10 10:00:00  receptionist_agent          INFO   ReceptionistAgent [YOUR_COMPANY_NAME] is live — waiting for calls …
 ```
 
 ## Sample Call Flow
@@ -98,7 +98,7 @@ Output:
 **Known caller (Alice Nguyen, +14155550101):**
 
 ```
-Agent:  "Hi Alice! Thanks for calling XanhSM. I see you have two open tickets —
+Agent:  "Hi Alice! Thanks for calling YOUR_COMPANY_NAME. I see you have two open tickets —
          one about a login page error and another about CSV exports. Is that what
          you're calling about?"
 Alice:  "Yes, the login issue is really urgent."
@@ -110,7 +110,7 @@ Agent:  "I understand. Let me connect you with our support team right away."
 **Unknown caller (+15551234567):**
 
 ```
-Agent:  "Thank you for calling XanhSM! I don't think we've spoken before.
+Agent:  "Thank you for calling YOUR_COMPANY_NAME! I don't think we've spoken before.
          How can I help you today?"
 Caller: "I'd like to learn about your enterprise plans."
 Agent:  "Our enterprise plan includes … [handles query via AI] …
@@ -138,7 +138,7 @@ The database is auto-seeded on first run with demo data:
 | `GEMINI_API_KEY` | *required* | Google Gemini API key |
 | `WSS_API_KEY` | *required* | Telcoflow API key |
 | `WSS_CONNECTOR_UUID` | *required* | Telcoflow connector UUID |
-| `BUSINESS_NAME` | `XanhSM` | Company name used in greetings |
+| `BUSINESS_NAME` | `YOUR_COMPANY_NAME` | Company name used in greetings |
 | `DB_PATH` | `receptionist.db` | SQLite database file path |
 | `GEMINI_MODEL` | `gemini-2.5-flash-native-audio-preview-12-2025` | Gemini Live model |
 | `SAMPLE_RATE` | `24000` | Audio sample rate (Hz) |
