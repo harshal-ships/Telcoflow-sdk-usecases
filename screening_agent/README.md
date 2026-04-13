@@ -1,6 +1,6 @@
 # Candidate Screening Agent — Multi-phase Voice Interview
 
-A production voice agent that conducts structured phone screening interviews using **Telcoflow SDK** (telephony) + **Gemini Live** (native audio + function calling). Inspired by the [LiveKit AgentTask/TaskGroup pattern](https://docs.livekit.io/agents/), rebuilt entirely on Telcoflow.
+A production voice agent that conducts structured phone screening interviews using **Telcoflow SDK** (telephony) + **Gemini Live** (native audio + function calling).
 
 ## Architecture Pattern: LiveKit → Telcoflow Translation
 

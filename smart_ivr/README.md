@@ -2,7 +2,7 @@
 
 Replaces traditional IVR phone trees ("press 1 for sales...") with a single natural voice conversation powered by **Telcoflow SDK** + **Gemini Live**. The caller just says what they need — the AI handles it or routes to the right department.
 
-**This use case is not in the Telcoflow documentation.** It demonstrates how Gemini Live's function calling can replace an entire IVR system with zero DTMF menus.
+It demonstrates how Gemini Live's function calling can replace an entire IVR system with zero DTMF menus.
 
 ## Why This Exists
 
