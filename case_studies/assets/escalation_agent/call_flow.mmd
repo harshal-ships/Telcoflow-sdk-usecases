@@ -1,0 +1,9 @@
+flowchart TD
+    A[Caller Dials In] --> B[AI Assistant Answers]
+    B --> C[Understand Request]
+    C --> D{Can AI Resolve?}
+    D -->|Yes| E[Provide Answer]
+    E --> F[End Call]
+    D -->|No| G[Save Conversation Context]
+    G --> H[Transfer to Human Agent]
+    H --> I[Agent Continues with Context]

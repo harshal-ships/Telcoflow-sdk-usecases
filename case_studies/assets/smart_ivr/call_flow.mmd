@@ -1,0 +1,11 @@
+flowchart TD
+    A[Caller Dials In] --> B[AI Greets Caller]
+    B --> C[Understand Intent]
+    C --> D{Type of Request}
+    D -->|Account or Orders| E[Self-Service Response]
+    D -->|Complaint| F[Log Complaint]
+    D -->|Callback| G[Schedule Callback]
+    D -->|Sales Support or Billing| H[Route to Department]
+    E --> I[End Call]
+    F --> I
+    G --> I

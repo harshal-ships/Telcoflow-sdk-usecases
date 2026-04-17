@@ -1,0 +1,9 @@
+flowchart TD
+    A[Customer Calls] --> B[AI Assistant Answers]
+    B --> C[Understand Service Request]
+    C --> D[Check Availability]
+    D --> E[Offer Time Slots]
+    E --> F{Caller Confirms?}
+    F -->|Yes| G[Book Appointment]
+    G --> H[Send Confirmation Message]
+    F -->|Needs Help| I[Transfer to Team]

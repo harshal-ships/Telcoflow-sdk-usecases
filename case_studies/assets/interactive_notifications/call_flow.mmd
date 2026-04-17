@@ -1,0 +1,11 @@
+flowchart TD
+    A[Call Connects] --> B[Identify Caller]
+    B --> C[Retrieve Pending Notifications]
+    C --> D[Read Notification Aloud]
+    D --> E{Caller Response}
+    E -->|Acknowledge| F[Mark as Acknowledged]
+    E -->|Needs Help| G[Flag for Follow-Up]
+    F --> H{More Items?}
+    G --> H
+    H -->|Yes| D
+    H -->|No| I[End Call with Summary]

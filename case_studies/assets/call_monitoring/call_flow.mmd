@@ -1,0 +1,10 @@
+flowchart TD
+    A[Customer Calls Support] --> B[Human Agent Answers]
+    B --> C[AI Silently Joins Call]
+    C --> D[Analyze Conversation]
+    D --> E{Coaching Needed?}
+    E -->|Yes| F[Privately Coach Agent]
+    F --> G[Return to Silent Monitoring]
+    E -->|No| G
+    G --> H[Log Sentiment and Topics]
+    H --> I[Call Ends and AI Exits]

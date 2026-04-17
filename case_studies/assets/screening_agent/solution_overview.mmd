@@ -1,0 +1,6 @@
+flowchart LR
+    Candidate((Candidate)) --> SDK[B3Networks Telcoflow SDK]
+    SDK --> Agent[Screening Assistant]
+    Agent --> Responses[(Candidate Responses)]
+    Agent --> Eval[Evaluation Pipeline]
+    Eval --> Results[Recruiter Results]

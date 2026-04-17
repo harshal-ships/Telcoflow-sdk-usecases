@@ -1,0 +1,9 @@
+flowchart TD
+    A[Incoming Call] --> B{Business Hours?}
+    B -->|Yes| C[Connect to Team]
+    B -->|No| D[AI Assistant Answers]
+    D --> E[Greet and Record Message]
+    E --> F[End Call]
+    F --> G[Generate Transcript]
+    G --> H[Save Voicemail Record]
+    H --> I[Notify Team for Follow-Up]

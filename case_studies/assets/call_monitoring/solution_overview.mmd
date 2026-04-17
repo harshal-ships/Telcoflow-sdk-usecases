@@ -1,0 +1,6 @@
+flowchart LR
+    Customer((Customer)) --> SDK[B3Networks Telcoflow SDK]
+    Agent((Human Agent)) --> SDK
+    SDK --> AI[Monitoring and Coaching Assistant]
+    AI -.Private Guidance.-> Agent
+    AI --> Analytics[(Call Analytics)]

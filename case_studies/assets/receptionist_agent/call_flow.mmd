@@ -1,0 +1,11 @@
+flowchart TD
+    A[Incoming Call] --> B[Identify Caller by Number]
+    B --> C{Known Caller?}
+    C -->|Yes| D[Personalized Greeting with Context]
+    C -->|No| E[Professional Greeting for New Caller]
+    D --> F[Understand Request]
+    E --> F
+    F --> G{AI Can Handle?}
+    G -->|Yes| H[Resolve Inquiry]
+    H --> I[End Call]
+    G -->|No| J[Route to Correct Department]

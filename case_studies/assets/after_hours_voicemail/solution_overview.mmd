@@ -1,0 +1,9 @@
+flowchart LR
+    Caller((Caller)) --> SDK[B3Networks Telcoflow SDK]
+    SDK --> Agent[After-Hours Voicemail Assistant]
+    Agent --> Recording[(Voicemail Recording)]
+    Agent --> Transcript[Transcript Generation]
+    Agent --> Notify[Team Notification]
+    Recording --> Team[Business Team]
+    Transcript --> Team
+    Notify --> Team

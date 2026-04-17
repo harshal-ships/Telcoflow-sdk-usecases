@@ -1,0 +1,6 @@
+flowchart LR
+    Customer((Customer)) --> SDK[B3Networks Telcoflow SDK]
+    SDK --> Agent[Notifications Assistant]
+    Agent --> CustDB[(Customer Records)]
+    Agent --> NotifDB[(Notifications)]
+    Agent --> FollowUp[Follow-Up Queue]
