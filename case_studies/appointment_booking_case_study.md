@@ -187,7 +187,3 @@ The Appointment Booking Assistant is a clear demonstration of how B3Networks com
 It helps clients improve conversion, reduce operational strain, and create a more convenient experience for callers. For marketing and education purposes, it is a strong example of practical voice AI that delivers immediate business value.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The Appointment Booking Assistant shows how B3Networks can turn inbound calls into completed appointments through a solution built on the Telcoflow SDK. Instead of relying entirely on staff to handle repetitive scheduling requests, the solution guides callers through availability checks, booking confirmation, and follow-up messaging, while still allowing human transfer when needed. It is a compelling example of voice AI improving both customer convenience and business efficiency.

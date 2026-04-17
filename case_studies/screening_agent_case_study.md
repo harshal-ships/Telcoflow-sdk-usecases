@@ -186,7 +186,3 @@ The Candidate Screening Assistant is a strong example of how B3Networks combines
 For marketing and educational purposes, it demonstrates that voice AI can support not only external customer experiences, but also internal business functions such as recruitment and talent operations.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The Candidate Screening Assistant shows how B3Networks can streamline first-round hiring conversations through a solution built on the Telcoflow SDK. By guiding candidates through a consistent interview flow, capturing key information, and supporting downstream evaluation, the solution helps recruitment teams reduce repetitive workload and scale early-stage screening more effectively. It is a strong example of voice AI improving internal operations as well as customer-facing workflows.

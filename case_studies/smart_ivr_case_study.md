@@ -177,7 +177,3 @@ The Smart IVR Assistant is one of the clearest examples of how B3Networks combin
 For marketing and educational use, it is especially powerful because nearly every client understands the pain of legacy IVR systems. This makes it an effective story for showing how voice AI can improve both usability and operational efficiency.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The Smart IVR Assistant shows how B3Networks can replace traditional phone trees with natural voice conversations through a solution built on the Telcoflow SDK. Instead of forcing callers through keypad menus, the solution understands intent, handles self-service requests, and routes conversations to the right team when needed. It is a strong example of voice AI improving customer experience while modernizing a common business workflow.

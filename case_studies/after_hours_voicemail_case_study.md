@@ -232,7 +232,3 @@ For marketing purposes, it demonstrates a clear business story.
 For educational purposes, it shows clients how voice AI can be applied in a practical, easy-to-understand workflow with immediate value.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The After-Hours Voicemail Assistant shows how B3Networks can help businesses stay responsive even when their team is offline through a solution built on the Telcoflow SDK. Instead of letting calls ring out or fall into a generic mailbox, the solution answers after-hours calls professionally, captures the caller's message, creates a transcript, stores the interaction, and alerts the team for follow-up. It is a simple but compelling example of how voice AI can improve customer experience, reduce missed opportunities, and turn a traditional voicemail process into an actionable business workflow.

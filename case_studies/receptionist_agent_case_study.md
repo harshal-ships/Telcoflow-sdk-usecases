@@ -184,7 +184,3 @@ The AI Receptionist Assistant is a strong demonstration of how B3Networks combin
 It is especially effective for marketing and educational purposes because it solves a familiar business challenge in a way that clients can immediately picture in their own operations.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The AI Receptionist Assistant shows how B3Networks can modernize the first point of contact for inbound phone calls through a solution built on the Telcoflow SDK. By recognizing callers, surfacing relevant context, answering common questions, and routing conversations to the right team, the solution helps businesses create a more personalized and efficient caller experience. It is a clear example of voice AI improving both service quality and operational flow.

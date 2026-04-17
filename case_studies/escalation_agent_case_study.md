@@ -162,7 +162,3 @@ The Human Escalation Support Assistant is a strong example of how B3Networks com
 It shows clients that voice AI does not need to replace human support to create value. Instead, it can improve speed, reduce repetitive workload, and make escalations cleaner and more customer-friendly. For marketing and educational use, it is one of the best examples of balanced, real-world AI deployment.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The Human Escalation Support Assistant shows how B3Networks can automate routine phone support while preserving a seamless handoff to live staff through a solution built on the Telcoflow SDK. By resolving simple inquiries, recognizing when escalation is appropriate, and passing useful context to the next team member, the solution improves efficiency without sacrificing customer trust. It is a strong example of practical hybrid AI support.

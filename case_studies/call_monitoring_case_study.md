@@ -167,7 +167,3 @@ The Call Monitoring and Coaching Assistant demonstrates how B3Networks combines 
 It is a strong case study for clients who want AI to improve agent performance, customer experience, and service quality in real time. For educational and marketing use, it is one of the most compelling examples of how voice intelligence can work alongside human teams.
 
 This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
-
-### Short Version for Google Doc Cover Page
-
-The Call Monitoring and Coaching Assistant shows how B3Networks can add real-time intelligence to live customer conversations through a solution built on the Telcoflow SDK. By monitoring ongoing calls, detecting difficult moments, and privately coaching human agents during the interaction, the solution helps businesses improve service quality, support agent performance, and capture useful call analytics. It is a powerful example of AI working alongside people rather than replacing them.
