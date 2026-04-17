@@ -1,14 +1,12 @@
-# Human Escalation Support Assistant
-
-## Client-Facing Case Study
+# Case Study: Human Escalation Support Assistant
 
 ### Executive Summary
 
 Many businesses want to automate support calls, but full automation is rarely the right answer for every situation. Some inquiries can be handled quickly by AI, while others require human judgment, account access, or a higher level of empathy.
 
-This case study highlights how B3Networks delivers a hybrid support solution through the Telcoflow SDK and related services, helping clients handle routine voice interactions while seamlessly transferring more complex calls to a live team member.
+B3Networks delivers a hybrid support solution built on the Telcoflow SDK and related services. It handles routine voice interactions automatically and transfers more complex calls to a live team member with full conversation context — so customers never have to repeat themselves after escalation.
 
-This makes the use case especially attractive for clients who want automation with control. It demonstrates that AI can improve efficiency without forcing businesses to give up the human safety net that customers still expect.
+The model is built for businesses that want automation with control: AI that improves efficiency without forcing them to give up the human safety net customers still expect.
 
 ### Business Challenge
 
@@ -63,6 +61,96 @@ flowchart TD
     H --> I[Agent Continues with Context]
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the Human Escalation Support Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+    Human((Human Agent)) <-->|Voice Call| PSTN
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Support Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Knowledge Base<br/>Conversation Context - Human Queue)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Lookup - Save Context - Handoff| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Caller** — the person looking for support.
+- **Telcoflow SDK** — the real-time voice layer handling both the AI conversation and the later transfer to a human agent.
+- **Agent Logic** — decides when the AI can resolve the request and when to escalate, and manages saving the full conversation context for handoff.
+- **AI Model (LLM)** — understands the caller, answers routine requests, and keeps memory of the conversation so nothing has to be repeated after handoff.
+- **Business Systems** — the knowledge base the AI can reference, the conversation context store, and the human agent queue.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Support Systems
+    participant H as Human Agent
+
+    C->>SDK: Dials the support line
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    loop AI handles the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Understands request<br/>Tracks conversation memory
+
+        opt Needs reference information
+            AI->>AGT: Look up knowledge
+            AGT->>SYS: Query knowledge base
+            SYS-->>AGT: Relevant info
+            AGT-->>AI: Share info
+        end
+
+        AI-->>AGT: Voice reply
+        AGT->>SDK: Play reply
+        SDK-->>C: Caller hears reply
+    end
+
+    alt AI can resolve the request
+        AI-->>AGT: Resolution complete
+        AGT->>SDK: Polite close
+        SDK-->>C: Call ends
+    else Needs human help
+        AGT->>SYS: Save full conversation context
+        AGT->>SDK: Transfer call to human agent
+        SDK-->>H: Human agent receives call
+        SYS-->>H: Context delivered to human agent
+        H-->>C: Human continues with full context
+    end
+```
+
+In plain terms, a typical call looks like this:
+
+1. A caller dials the support line and the AI model answers.
+2. The Telcoflow SDK streams the caller's audio to the AI model, which understands the request and uses memory of the conversation to avoid repetition.
+3. For routine requests, the AI model responds directly, optionally looking up reference information from a knowledge base through the agent logic.
+4. If the request is too complex or the caller asks for a human, the agent saves the full conversation context to the support systems and transfers the call to a live agent.
+5. The human agent receives both the call and the saved context, so they can continue from where the AI left off without asking the caller to repeat themselves.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Experience And Workflow
 
 From the caller's perspective, the experience is efficient and reassuring.
@@ -109,7 +197,7 @@ The customer gets a smoother handoff, and the business avoids using AI where hum
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study demonstrates how B3Networks can deliver the following through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Incoming call handling with natural voice interaction
 - AI-led first-line support for common issues
@@ -143,11 +231,11 @@ Clients can evaluate impact through:
 - Agent productivity improvement for complex call queues
 - Containment rate for routine support requests
 
-These measures help show that the value lies not just in automation volume, but in better support design.
+Together, these measures capture the true value of the solution: not just automation volume, but better support design.
 
 ### Sales And Marketing Positioning
 
-This case study is useful in client conversations because it addresses a common hesitation around AI adoption:
+The Human Escalation Support Assistant addresses a common hesitation around AI adoption:
 
 - Automate routine calls without losing the human option
 - Give customers a smoother path from AI support to live support
@@ -157,8 +245,8 @@ This case study is useful in client conversations because it addresses a common 
 
 ### Key Takeaway
 
-The Human Escalation Support Assistant is a strong example of how B3Networks combines the Telcoflow SDK and service delivery expertise to blend automation with live service operations.
+With the Human Escalation Support Assistant, B3Networks combines the Telcoflow SDK and service delivery expertise to blend automation with live service operations.
 
-It shows clients that voice AI does not need to replace human support to create value. Instead, it can improve speed, reduce repetitive workload, and make escalations cleaner and more customer-friendly. For marketing and educational use, it is one of the best examples of balanced, real-world AI deployment.
+Voice AI does not need to replace human support to create value. It improves speed, reduces repetitive workload, and makes escalations cleaner and more customer-friendly — a balanced, real-world AI deployment that protects the human relationship while automating the routine.
 
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant C as Customer
+    participant SDK as Telcoflow SDK
+    participant H as Human Agent
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Analytics
+
+    C->>SDK: Calls support line
+    SDK->>H: Route call to human agent
+    H-->>C: Human agent answers
+
+    SDK->>AGT: Monitoring session starts
+    AGT->>AI: Attach AI as silent listener
+    Note over AI: Listens silently<br/>Builds running call context
+
+    loop Throughout the conversation
+        C->>SDK: Customer speaks
+        H->>SDK: Agent speaks
+        SDK->>AGT: Combined live audio stream
+        AGT->>AI: Forward audio with context
+
+        opt Coaching opportunity detected
+            AI->>AGT: Private guidance
+            AGT->>SDK: Whisper guidance to agent only
+            SDK-->>H: Agent hears private coaching
+        end
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>AI: Generate summary and sentiment
+    AI-->>AGT: Insights and sentiment score
+    AGT->>SYS: Save call analytics

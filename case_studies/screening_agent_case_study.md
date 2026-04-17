@@ -1,12 +1,10 @@
-# Candidate Screening Assistant
-
-## Client-Facing Case Study
+# Case Study: Candidate Screening Assistant
 
 ### Executive Summary
 
 Recruitment teams often spend significant time on early-stage screening calls, collecting the same basic information from every candidate before deciding who should move forward. This is necessary work, but it is repetitive, time-consuming, and difficult to scale when application volume rises.
 
-This case study highlights how B3Networks delivers a voice-based hiring workflow solution through the Telcoflow SDK and related services, helping clients conduct structured screening interviews, capture key applicant information, and support downstream evaluation.
+B3Networks delivers a voice-based hiring workflow solution built on the Telcoflow SDK and related services. It conducts structured screening interviews, captures key applicant information, and supports downstream evaluation — letting recruiting teams focus their time on the strongest candidates instead of on scheduling logistics.
 
 This gives hiring teams a practical way to streamline first-round phone screening while maintaining consistency and professionalism.
 
@@ -72,6 +70,90 @@ flowchart TD
     H --> I[Deliver to Recruiter Review]
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the Candidate Screening Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Candidate((Candidate)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Screening Agent Logic<br/>Structured Interview Flow]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Candidate Responses<br/>Evaluation Pipeline - Recruiter Results)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Capture - Evaluate - Report| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Candidate** — the applicant joining the interview call.
+- **Telcoflow SDK** — the real-time voice layer handling the live call and audio stream.
+- **Agent Logic** — walks the interview through a structured set of sections and records each response in a structured form.
+- **AI Model (LLM)** — asks each question, listens to the candidate's answer, and keeps memory of the full interview so it can pose natural follow-up questions.
+- **Business Systems** — the candidate response store, the evaluation pipeline, and the recruiter results delivery layer.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Candidate
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Response Store and Evaluation
+
+    C->>SDK: Joins the interview call
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+    AGT->>AI: Start interview with greeting prompt
+
+    loop For each interview section
+        AGT->>AI: Move to next section prompt
+        AI-->>AGT: Section question audio
+        AGT->>SDK: Play question
+        SDK-->>C: Candidate hears question
+
+        loop Back and forth until section complete
+            C->>SDK: Candidate answers
+            SDK->>AGT: Live audio stream
+            AGT->>AI: Forward audio with context
+            Note over AI: Captures response<br/>Keeps full interview memory
+            AI-->>AGT: Follow-up or confirmation
+            AGT->>SDK: Play reply
+            SDK-->>C: Candidate hears reply
+        end
+
+        AGT->>SYS: Save structured response
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>SYS: Run evaluation pipeline
+    SYS-->>AGT: Candidate summary and scores
+    AGT->>SYS: Deliver results to recruiter
+```
+
+In plain terms, a typical screening call looks like this:
+
+1. A candidate joins the interview call and the AI model opens with a greeting prompt prepared by the agent logic.
+2. The agent walks the interview through a structured set of sections one at a time, such as introduction, contact details, commute, work experience, and behavioral questions.
+3. Within each section, the AI model asks the question, the candidate responds, and the SDK streams the audio to the AI model. The AI model captures the answer and maintains memory of the full interview so it can pose natural follow-up questions.
+4. After each section, the agent saves the structured response to the candidate store.
+5. When the call ends, the agent runs the evaluation pipeline to produce candidate scores and a summary, which are delivered to the recruiter for review.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Candidate Experience
 
 From the candidate's perspective, the experience is straightforward and guided.
@@ -133,7 +215,7 @@ Recruiters can then spend more time on shortlist selection and later-stage inter
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study demonstrates how B3Networks can deliver the following through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Structured voice interviews over live calls
 - Multi-step conversational workflows
@@ -171,7 +253,7 @@ These metrics help show how the workflow improves recruiting operations in measu
 
 ### Sales And Marketing Positioning
 
-This case study gives B3Networks a strong internal-operations AI story:
+The Candidate Screening Assistant gives B3Networks a compelling internal-operations story:
 
 - Scale first-round candidate screening without scaling manual effort
 - Improve consistency across early-stage hiring
@@ -181,8 +263,8 @@ This case study gives B3Networks a strong internal-operations AI story:
 
 ### Key Takeaway
 
-The Candidate Screening Assistant is a strong example of how B3Networks combines the Telcoflow SDK and service expertise to automate a structured, repetitive, and operationally important workflow outside the traditional customer service domain.
+With the Candidate Screening Assistant, B3Networks combines the Telcoflow SDK and service expertise to automate a structured, repetitive, and operationally important workflow outside the traditional customer service domain.
 
-For marketing and educational purposes, it demonstrates that voice AI can support not only external customer experiences, but also internal business functions such as recruitment and talent operations.
+The solution shows that voice AI can support not only external customer experiences, but also internal business functions such as recruitment and talent operations.
 
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

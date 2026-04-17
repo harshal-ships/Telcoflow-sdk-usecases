@@ -1,0 +1,44 @@
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as CRM and Tickets
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event with caller number
+    AGT->>SYS: Identify caller by number
+    SYS-->>AGT: Customer profile and open tickets
+
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+    AGT->>AI: Start with personalized greeting prompt and context
+    AI-->>AGT: Personalized greeting audio
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears personalized greeting
+
+    loop Throughout the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with customer context
+        Note over AI: Understands request<br/>Uses CRM context and memory
+
+        opt Needs detail from systems
+            AI->>AGT: Lookup ticket or record
+            AGT->>SYS: Query systems
+            SYS-->>AGT: Data
+            AGT-->>AI: Share data
+        end
+
+        AI-->>AGT: Voice reply
+        AGT->>SDK: Play reply
+        SDK-->>C: Caller hears reply
+    end
+
+    alt AI resolves the request
+        AGT->>SYS: Log interaction
+        C->>SDK: Call ends
+    else Needs a department
+        AGT->>SDK: Route to correct department
+        SDK-->>C: Warm transfer to department
+    end

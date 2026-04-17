@@ -1,0 +1,46 @@
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Business Systems
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+    AGT->>AI: Start with open greeting prompt
+
+    AI-->>AGT: "How can I help you?"
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears greeting
+
+    loop Determine intent
+        C->>SDK: Caller states request
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Classifies intent<br/>Uses conversation memory
+        AI-->>AGT: Detected intent
+    end
+
+    alt Account or order self-service
+        AI->>AGT: Lookup self-service data
+        AGT->>SYS: Query data
+        SYS-->>AGT: Result
+        AGT-->>AI: Share result
+        AI-->>AGT: Spoken answer
+        AGT->>SDK: Play answer
+        SDK-->>C: Caller hears answer
+    else Complaint
+        AI->>AGT: Log complaint
+        AGT->>SYS: Save complaint
+    else Callback request
+        AI->>AGT: Schedule callback
+        AGT->>SYS: Create callback
+    else Needs a department
+        AGT->>SDK: Route to correct department
+        SDK-->>C: Warm transfer
+    end
+
+    C->>SDK: Call ends
+    AGT->>SYS: Update analytics

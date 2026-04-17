@@ -38,6 +38,86 @@ With the Telcoflow SDK, B3Networks can help clients:
 
 This makes the platform suitable for both customer-facing and internal business use cases.
 
+## How A Telcoflow Agent Handles A Call
+
+Every agent in this portfolio runs on the same underlying pattern. Understanding this pattern makes it clear why the same foundation can support such a wide range of business use cases.
+
+### Runtime Architecture
+
+```mermaid
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Agent Logic<br/>Business Rules and Flow]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Business Systems<br/>CRM - Calendar - Database)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Tool Calls and Lookups| Systems
+```
+
+A running Telcoflow agent connects four layers:
+
+- **Caller** — the person on the phone, using any regular phone or mobile device.
+- **Telcoflow SDK** — the real-time voice layer that bridges the telephony network and the backend. It handles the call event signalling and the live audio stream in both directions.
+- **Agent Logic** — the business rules that decide what the agent should do on a given call, such as checking business hours, identifying the caller, or choosing when to hand off to a human.
+- **AI Model (LLM)** — the conversational intelligence that actually understands the caller and produces natural voice responses. It keeps a running memory of the conversation so the caller does not have to repeat themselves, and can be asked to perform lookups or actions through the agent logic layer.
+- **Business Systems** — the data and tools the agent needs to be useful, such as scheduling, CRM, databases, notifications, or ticketing.
+
+### How A Call Plays Out Step By Step
+
+```mermaid
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Business Systems
+
+    C->>SDK: Dials the phone number
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    loop Throughout the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Send audio with conversation context
+        Note over AI: Understands the caller<br/>Uses running memory of the call
+        opt If information or action is needed
+            AI->>AGT: Request data or action
+            AGT->>SYS: Lookup or update
+            SYS-->>AGT: Result
+            AGT-->>AI: Share result
+        end
+        AI-->>AGT: Generated voice response
+        AGT->>SDK: Play response
+        SDK-->>C: Caller hears the reply
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>SYS: Save transcript and summary
+```
+
+In plain terms, a typical call looks like this:
+
+1. A caller dials the business number and the Telcoflow SDK receives the incoming call.
+2. The agent answers and a live audio connection opens between the caller and the backend.
+3. As the caller speaks, their voice is streamed to the AI model in real time.
+4. The AI model understands what the caller said, keeps track of the full conversation so far, and decides how to respond. If it needs more context, such as a booking lookup or a customer record, it asks the agent logic to fetch that information from the business systems.
+5. The AI model produces a natural voice reply, which is streamed back through the Telcoflow SDK and played to the caller with very low delay.
+6. This back-and-forth continues for the whole call, creating a natural conversation rather than a scripted menu.
+7. When the call ends, the agent stores a transcript and summary for follow-up, reporting, or compliance.
+
+Because this loop is the same across every use case, B3Networks can rapidly build new agents by changing only the agent logic and the business systems it connects to. The real-time voice layer and the AI conversation layer remain the same proven foundation.
+
 ## Why These Case Studies Matter
 
 Many organizations understand the promise of AI, but they need concrete examples of how it applies to real business workflows. These case studies are designed to make that value tangible.
@@ -163,4 +243,4 @@ These case studies are representative examples of what B3Networks can deliver wi
 
 Together, these examples show that the B3Networks Telcoflow SDK is not limited to a single type of AI agent or a narrow telephony use case. It provides a flexible foundation for designing practical, business-oriented voice solutions that can improve service, efficiency, responsiveness, and operational visibility.
 
-For client conversations, this portfolio helps tell a clear story: B3Networks does not just provide telephony technology. It helps organizations turn voice interactions into smarter business outcomes.
+B3Networks does not just provide telephony technology. It helps organizations turn voice interactions into smarter business outcomes.

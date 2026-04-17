@@ -1,12 +1,10 @@
-# Smart IVR Assistant
-
-## Client-Facing Case Study
+# Case Study: Smart IVR Assistant
 
 ### Executive Summary
 
 Traditional phone menus create friction. Customers often get stuck in long menu trees, press the wrong option, restart the process, or give up before reaching the right destination.
 
-This case study highlights how B3Networks delivers a modern conversational IVR solution through the Telcoflow SDK and related services, helping clients replace conventional IVR experiences with a Smart IVR Assistant that allows callers to simply say what they need in natural language.
+B3Networks delivers a modern conversational IVR solution built on the Telcoflow SDK and related services. It replaces traditional keypad menus with a Smart IVR Assistant that lets callers simply say what they need in natural language — reaching the right outcome faster, without menu trees or wait queues for routine requests.
 
 Instead of "press 1 for sales" and "press 2 for support," the caller can speak normally, and the system can either complete the request or route the conversation to the right department.
 
@@ -68,6 +66,99 @@ flowchart TD
     G --> I
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the Smart IVR Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Smart IVR Agent Logic<br/>Intent Routing]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Self-Service Data<br/>Complaints - Callbacks - Departments - Analytics)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Lookup - Log - Route| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Caller** — anyone calling the main business number for any reason.
+- **Telcoflow SDK** — the real-time voice layer handling the live call and audio stream.
+- **Agent Logic** — takes the classified intent from the AI model and chooses whether to self-serve, log, schedule, or route.
+- **AI Model (LLM)** — opens with a natural greeting, understands the caller's intent without a keypad menu, and keeps memory of the conversation.
+- **Business Systems** — self-service data sources, complaint log, callback queue, department routing, and call analytics.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Business Systems
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+    AGT->>AI: Start with open greeting prompt
+
+    AI-->>AGT: "How can I help you?"
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears greeting
+
+    loop Determine intent
+        C->>SDK: Caller states request
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Classifies intent<br/>Uses conversation memory
+        AI-->>AGT: Detected intent
+    end
+
+    alt Account or order self-service
+        AI->>AGT: Lookup self-service data
+        AGT->>SYS: Query data
+        SYS-->>AGT: Result
+        AGT-->>AI: Share result
+        AI-->>AGT: Spoken answer
+        AGT->>SDK: Play answer
+        SDK-->>C: Caller hears answer
+    else Complaint
+        AI->>AGT: Log complaint
+        AGT->>SYS: Save complaint
+    else Callback request
+        AI->>AGT: Schedule callback
+        AGT->>SYS: Create callback
+    else Needs a department
+        AGT->>SDK: Route to correct department
+        SDK-->>C: Warm transfer
+    end
+
+    C->>SDK: Call ends
+    AGT->>SYS: Update analytics
+```
+
+In plain terms, a typical Smart IVR call looks like this:
+
+1. A caller dials the business number and the AI model opens with an open greeting such as "How can I help you?". There is no keypad menu.
+2. The caller speaks freely about what they need. The Telcoflow SDK streams the audio and the AI model classifies the intent using its conversation memory.
+3. For self-service requests, such as account balance or order status, the AI model asks the agent to query the relevant data source and then reads the answer back to the caller.
+4. For complaints, the AI model captures the issue and the agent logs it. For callback requests, the agent schedules the callback. For specialist needs, the call is transferred to the correct department with a warm handoff.
+5. On every call, analytics are updated so the business can monitor intent distribution, resolution rates, and call patterns.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Caller Experience
 
 For the caller, the experience is dramatically simpler.
@@ -124,7 +215,7 @@ These examples show that the experience can support both self-service and smart 
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study demonstrates how B3Networks can deliver the following through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Natural-language front-end call handling
 - Voice-based self-service flows
@@ -162,7 +253,7 @@ These outcomes help frame Smart IVR as both a customer experience upgrade and an
 
 ### Sales And Marketing Positioning
 
-This case study supports strong client-facing messages such as:
+The Smart IVR Assistant supports client-facing messages such as:
 
 - Replace rigid phone menus with natural conversation
 - Reduce caller frustration and speed up service
@@ -174,6 +265,6 @@ This case study supports strong client-facing messages such as:
 
 The Smart IVR Assistant is one of the clearest examples of how B3Networks combines the Telcoflow SDK and service delivery expertise to modernize a familiar business experience with immediate customer impact.
 
-For marketing and educational use, it is especially powerful because nearly every client understands the pain of legacy IVR systems. This makes it an effective story for showing how voice AI can improve both usability and operational efficiency.
+Nearly every client already understands the pain of legacy IVR systems, which makes the value of conversational voice easy to recognize — improved usability and lower operational cost, without rebuilding the entire phone system.
 
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

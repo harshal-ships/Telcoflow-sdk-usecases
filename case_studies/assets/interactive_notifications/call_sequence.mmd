@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant C as Customer
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Customer and Notifications Data
+
+    C->>SDK: Call connects
+    SDK->>AGT: Call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    AGT->>SYS: Identify caller by number
+    SYS-->>AGT: Customer profile
+    AGT->>SYS: Fetch pending notifications
+    SYS-->>AGT: List of notifications
+
+    loop For each pending notification
+        AGT->>AI: Read notification with context
+        Note over AI: Delivers notification<br/>Keeps memory across the call
+        AI-->>AGT: Voice delivery
+        AGT->>SDK: Play notification
+        SDK-->>C: Customer hears notification
+
+        C->>SDK: Customer responds
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+
+        alt Customer acknowledges
+            AI-->>AGT: Mark as acknowledged
+            AGT->>SYS: Update notification status
+        else Customer needs follow-up
+            AI-->>AGT: Flag for follow-up
+            AGT->>SYS: Queue follow-up action
+        end
+    end
+
+    AI-->>AGT: Final summary and close
+    AGT->>SDK: Play summary
+    C->>SDK: Call ends
+    AGT->>SYS: Persist all updates

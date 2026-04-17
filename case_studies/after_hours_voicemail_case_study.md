@@ -1,12 +1,10 @@
-# After-Hours Voicemail Assistant
-
-## Client-Facing Case Study
+# Case Study: After-Hours Voicemail Assistant
 
 ### Executive Summary
 
 Many businesses lose valuable opportunities after working hours. Customers call with urgent questions, service requests, or sales intent, but when nobody answers, those calls often turn into missed revenue, delayed support, and poor customer experience.
 
-This case study highlights how B3Networks delivers an after-hours voicemail solution through the Telcoflow SDK and related services, helping clients answer calls professionally, capture the caller's message, create a written transcript, store the interaction for follow-up, and alert the team in real time.
+B3Networks delivers an after-hours voicemail solution built on the Telcoflow SDK and related services. It answers calls professionally, captures the caller's message, creates a written transcript, stores the interaction for follow-up, and alerts the team in real time — so no after-hours opportunity slips through unnoticed.
 
 The result is a simple but high-impact experience:
 
@@ -14,7 +12,7 @@ The result is a simple but high-impact experience:
 - Teams wake up to clear, structured follow-up items instead of scattered missed calls.
 - Businesses extend their responsiveness without extending staffing hours.
 
-This is a practical example of how voice AI can improve service availability while keeping the experience familiar, human, and operationally useful.
+The assistant improves service availability while keeping the experience familiar, human, and operationally useful.
 
 ### Business Challenge
 
@@ -81,6 +79,85 @@ flowchart TD
     H --> I[Notify Team for Follow-Up]
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the After-Hours Voicemail Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Voicemail Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Voicemail Store<br/>Transcripts - Team Notifications)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Save - Transcribe - Notify| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Caller** — the person on the phone outside business hours.
+- **Telcoflow SDK** — the real-time voice layer that receives the call and streams audio in both directions.
+- **Agent Logic** — decides what to do based on current time, business hours, and the state of the call.
+- **AI Model (LLM)** — delivers the greeting, listens to the caller's message, and keeps memory of what was said so it can confirm or guide if needed.
+- **Business Systems** — the voicemail store, transcription service, and team notification channels.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Voicemail Systems
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event
+    AGT->>AGT: Check business hours
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    AGT->>AI: Start assistant with greeting prompt
+    AI-->>AGT: Professional greeting audio
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears greeting
+
+    loop Caller leaves their message
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Listens and confirms<br/>Uses memory of the message
+        AI-->>AGT: Optional clarifying reply
+        AGT->>SDK: Play reply if needed
+        SDK-->>C: Caller hears reply
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>SYS: Save voicemail recording
+    AGT->>SYS: Generate and store transcript
+    AGT->>SYS: Send team notification
+```
+
+In plain terms, a typical after-hours call looks like this:
+
+1. A caller dials the business line and the Telcoflow SDK receives the call event.
+2. The agent logic checks the current time. If it is outside business hours, the AI model is started and delivers a professional greeting.
+3. While the caller records their message, the SDK streams the audio to the agent, which forwards it to the AI model. The AI model keeps memory of the message so it can confirm or gently guide the caller if needed.
+4. When the caller hangs up, the agent saves the recording, generates a written transcript, and sends a team notification so staff can prioritize follow-up at the start of the next shift.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Experience And Workflow
 
 #### Caller Experience
@@ -110,7 +187,7 @@ This allows the next business-day follow-up process to start with context instea
 
 ### Business Impact
 
-This use case is powerful not because it is flashy, but because it solves a common operational gap with a clear return on value.
+The After-Hours Voicemail Assistant solves a common operational gap with a clear return on value: every after-hours call is captured, structured, and routed to the right person instead of being lost.
 
 #### 1. Better First Impression
 
@@ -151,7 +228,7 @@ That means the first staff member reviewing overnight inquiries can immediately 
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study demonstrates several capabilities B3Networks can deliver for clients through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Real-time call handling for inbound voice workflows
 - Logic-based call routing by business hours
@@ -173,11 +250,11 @@ The solution includes:
 - Transcript generation for fast review
 - Team notifications for prompt action
 
-This makes the use case suitable not only as a demo, but also as a strong foundation for production deployments in organizations that want a more dependable after-hours process.
+The solution is suitable not only for demos, but as a production-ready foundation for organizations that want a more dependable after-hours process.
 
 ### Educational Value for Clients
 
-For educational and pre-sales conversations, this use case is useful because it helps clients understand how voice AI fits into familiar business operations.
+The After-Hours Voicemail Assistant makes voice AI easy to understand by tying it to a familiar business operation that every leader has already experienced.
 
 It shows that:
 
@@ -185,11 +262,11 @@ It shows that:
 - Voice automation can be introduced incrementally
 - Business rules and human follow-up can still remain central to the customer journey
 
-That makes this use case an effective entry point for organizations that are interested in AI but want a low-risk, practical starting point.
+That makes it an effective entry point for organizations exploring AI and looking for a low-risk, practical starting point.
 
 ### Sales And Marketing Positioning
 
-If this case study is used in client presentations or Google Docs, these are strong headline messages:
+The headline messages for this solution are:
 
 - Never let after-hours calls disappear into a black hole
 - Turn voicemail into structured follow-up work
@@ -208,7 +285,7 @@ To make the value concrete, clients can measure outcomes such as:
 - Team response efficiency using transcript-based triage
 - Conversion or resolution rate from after-hours inquiries
 
-These metrics help move the conversation from "AI demo" to "business outcome."
+These metrics frame the assistant as a business outcome, not an AI demo.
 
 ### Ideal Client Profiles
 
@@ -223,12 +300,10 @@ It is a strong fit for both SMB and enterprise scenarios, particularly when resp
 
 ### Key Takeaway
 
-The After-Hours Voicemail Assistant is a strong example of how B3Networks combines the Telcoflow SDK and related services to deliver real-world voice-driven workflow, not just voice interaction.
+With the After-Hours Voicemail Assistant, B3Networks combines the Telcoflow SDK and related services to deliver real-world voice-driven workflow — not just voice interaction.
 
-It helps businesses stay responsive when staff are unavailable, turns unstructured audio into actionable information, and improves continuity between customer intent and team follow-up.
+Businesses stay responsive when staff are unavailable, unstructured audio becomes actionable information, and continuity improves between customer intent and team follow-up.
 
-For marketing purposes, it demonstrates a clear business story.
+It is a practical, easy-to-understand starting point for any business beginning to explore voice AI — immediate value, minimal disruption to existing operations.
 
-For educational purposes, it shows clients how voice AI can be applied in a practical, easy-to-understand workflow with immediate value.
-
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

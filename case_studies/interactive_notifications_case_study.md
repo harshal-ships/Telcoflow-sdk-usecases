@@ -1,12 +1,10 @@
-# Interactive Notifications Assistant
-
-## Client-Facing Case Study
+# Case Study: Interactive Notifications Assistant
 
 ### Executive Summary
 
 Businesses often need to notify customers about deadlines, reminders, payments, updates, or required actions. But one-way communication channels are limited: emails are ignored, text messages are skimmed, and outbound notices do not always confirm whether the customer actually understood or acknowledged the message.
 
-This case study highlights how B3Networks delivers an interactive customer outreach solution through the Telcoflow SDK and related services, helping clients deliver notifications over voice calls and allowing customers to acknowledge each one or request follow-up in a natural conversation.
+B3Networks delivers an interactive customer outreach solution built on the Telcoflow SDK and related services. It delivers notifications over voice calls and lets customers acknowledge each one or request follow-up in a natural conversation — turning one-way alerts into two-way engagement.
 
 This transforms notifications from passive outreach into an active, trackable customer interaction.
 
@@ -74,6 +72,94 @@ flowchart TD
     H -->|No| I[End Call with Summary]
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the Interactive Notifications Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Customer((Customer)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Notifications Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Customer Records<br/>Notifications - Follow-Up Queue)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Fetch - Update - Queue| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Customer** — the person receiving or calling in for their notifications.
+- **Telcoflow SDK** — the real-time voice layer handling the live call and audio stream.
+- **Agent Logic** — identifies the caller, fetches their pending notifications, and persists acknowledgements or follow-up flags.
+- **AI Model (LLM)** — reads each notification to the caller, listens to the response, and keeps memory across the conversation so the flow feels natural rather than scripted.
+- **Business Systems** — customer records, the notifications store, and the follow-up queue for items that require human attention.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Customer
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Customer and Notifications Data
+
+    C->>SDK: Call connects
+    SDK->>AGT: Call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    AGT->>SYS: Identify caller by number
+    SYS-->>AGT: Customer profile
+    AGT->>SYS: Fetch pending notifications
+    SYS-->>AGT: List of notifications
+
+    loop For each pending notification
+        AGT->>AI: Read notification with context
+        Note over AI: Delivers notification<br/>Keeps memory across the call
+        AI-->>AGT: Voice delivery
+        AGT->>SDK: Play notification
+        SDK-->>C: Customer hears notification
+
+        C->>SDK: Customer responds
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+
+        alt Customer acknowledges
+            AI-->>AGT: Mark as acknowledged
+            AGT->>SYS: Update notification status
+        else Customer needs follow-up
+            AI-->>AGT: Flag for follow-up
+            AGT->>SYS: Queue follow-up action
+        end
+    end
+
+    AI-->>AGT: Final summary and close
+    AGT->>SDK: Play summary
+    C->>SDK: Call ends
+    AGT->>SYS: Persist all updates
+```
+
+In plain terms, a typical notifications call looks like this:
+
+1. A call connects between the customer and the backend (either inbound or outbound).
+2. The agent identifies the caller from the phone number and fetches the list of pending notifications from the business systems.
+3. For each notification, the AI model reads it to the customer, keeping memory of which items have already been covered.
+4. The customer responds; the AI model understands whether they acknowledged the notification or need follow-up, and the agent updates the business systems accordingly.
+5. Once all notifications are delivered, the AI model closes the call with a brief summary and all updates are persisted for reporting and operations.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Experience And Workflow
 
 From the customer's perspective, the experience is simple and guided.
@@ -103,7 +189,7 @@ This improves prioritization and reduces manual tracking effort.
 
 ### Business Impact
 
-This workflow gives clients a very strong example of voice AI as a business operations tool.
+The Interactive Notifications Assistant turns voice AI into a business operations tool rather than a service channel alone.
 
 #### 1. Higher Notification Effectiveness
 
@@ -137,7 +223,7 @@ That is a meaningful improvement in both service quality and internal efficiency
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study demonstrates how B3Networks can deliver the following through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Personalized voice interactions based on caller identity
 - Data-driven retrieval of pending notifications
@@ -175,7 +261,7 @@ These metrics help make the business case concrete and measurable.
 
 ### Sales And Marketing Positioning
 
-This case study helps B3Networks tell a differentiated story:
+The Interactive Notifications Assistant supports a differentiated positioning story:
 
 - Turn notifications into two-way customer interactions
 - Know which customers acknowledged and which need help
@@ -187,6 +273,6 @@ This case study helps B3Networks tell a differentiated story:
 
 The Interactive Notifications Assistant shows how B3Networks combines the Telcoflow SDK and service expertise to modernize an important but often overlooked business process.
 
-By turning static notifications into interactive voice conversations, the solution helps clients improve communication effectiveness, streamline operations, and create a more responsive customer experience. For marketing and educational purposes, it is a valuable example of voice AI applied beyond traditional call center automation.
+By turning static notifications into interactive voice conversations, the solution helps clients improve communication effectiveness, streamline operations, and create a more responsive customer experience — voice AI applied beyond traditional call center automation.
 
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

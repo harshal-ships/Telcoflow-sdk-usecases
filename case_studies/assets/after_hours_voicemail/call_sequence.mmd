@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Voicemail Systems
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event
+    AGT->>AGT: Check business hours
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    AGT->>AI: Start assistant with greeting prompt
+    AI-->>AGT: Professional greeting audio
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears greeting
+
+    loop Caller leaves their message
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Listens and confirms<br/>Uses memory of the message
+        AI-->>AGT: Optional clarifying reply
+        AGT->>SDK: Play reply if needed
+        SDK-->>C: Caller hears reply
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>SYS: Save voicemail recording
+    AGT->>SYS: Generate and store transcript
+    AGT->>SYS: Send team notification

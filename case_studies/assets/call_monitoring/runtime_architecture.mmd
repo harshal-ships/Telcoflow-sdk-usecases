@@ -1,0 +1,17 @@
+flowchart LR
+    Customer((Customer)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+    HumanAgent((Human Agent)) <-->|Voice Call| PSTN
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer<br/>3-Way Call Setup]
+        Logic[Monitoring Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Call Analytics<br/>Sentiment - Topics - Coaching Logs)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-.Whisper to Agent Only.-> SDK
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Log Insights| Systems

@@ -1,12 +1,10 @@
-# AI Receptionist Assistant
-
-## Client-Facing Case Study
+# Case Study: AI Receptionist Assistant
 
 ### Executive Summary
 
 For many businesses, the first phone interaction sets the tone for the entire customer relationship. But traditional receptionist workflows often depend on manual lookups, repeated questions, and transfers that slow the experience down for both callers and internal teams.
 
-This case study highlights how B3Networks delivers a modern inbound call handling solution through the Telcoflow SDK and related services, enabling personalized greetings, caller recognition, contextual support, and intelligent routing.
+B3Networks delivers a modern inbound call handling solution built on the Telcoflow SDK and related services. It provides personalized greetings, caller recognition, contextual support, and intelligent routing — so every caller feels known and in the right hands from the first moment of the conversation.
 
 This makes the phone experience more personalized, more efficient, and more scalable.
 
@@ -74,6 +72,97 @@ flowchart TD
     G -->|No| J[Route to Correct Department]
 ```
 
+### How It Works Under The Hood
+
+This section provides a technical view of how the AI Receptionist Assistant runs at call time. It shows how B3Networks combines the Telcoflow SDK with an AI model and the relevant business systems to deliver the solution.
+
+**Runtime Architecture**
+
+```mermaid
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Receptionist Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Customer Records<br/>Open Tickets - Department Routing)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Identify - Lookup - Route| Systems
+```
+
+At runtime, this assistant connects four layers:
+
+- **Caller** — anyone calling the main business number.
+- **Telcoflow SDK** — the real-time voice layer that passes the caller number and handles the live audio stream.
+- **Agent Logic** — identifies the caller before the call is answered, prepares personalized context, and handles routing to departments.
+- **AI Model (LLM)** — delivers the personalized greeting, holds the conversation, uses CRM context, and keeps memory across the call.
+- **Business Systems** — customer records, open tickets, and the department routing layer.
+
+**Call Sequence**
+
+```mermaid
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as CRM and Tickets
+
+    C->>SDK: Dials the business number
+    SDK->>AGT: Incoming call event with caller number
+    AGT->>SYS: Identify caller by number
+    SYS-->>AGT: Customer profile and open tickets
+
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+    AGT->>AI: Start with personalized greeting prompt and context
+    AI-->>AGT: Personalized greeting audio
+    AGT->>SDK: Play greeting
+    SDK-->>C: Caller hears personalized greeting
+
+    loop Throughout the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with customer context
+        Note over AI: Understands request<br/>Uses CRM context and memory
+
+        opt Needs detail from systems
+            AI->>AGT: Lookup ticket or record
+            AGT->>SYS: Query systems
+            SYS-->>AGT: Data
+            AGT-->>AI: Share data
+        end
+
+        AI-->>AGT: Voice reply
+        AGT->>SDK: Play reply
+        SDK-->>C: Caller hears reply
+    end
+
+    alt AI resolves the request
+        AGT->>SYS: Log interaction
+        C->>SDK: Call ends
+    else Needs a department
+        AGT->>SDK: Route to correct department
+        SDK-->>C: Warm transfer to department
+    end
+```
+
+In plain terms, a typical reception call looks like this:
+
+1. A caller dials the main business number and the Telcoflow SDK passes the call event along with the caller's phone number to the agent logic.
+2. Before the call is even answered, the agent logic looks up the caller in the CRM to identify whether they are a known customer and to retrieve any open tickets.
+3. The agent answers and the AI model delivers a personalized greeting such as "Hi John, are you calling about your open order?".
+4. While the caller speaks, the AI model uses the retrieved CRM context and its running conversation memory to resolve the request, or to request additional details from the business systems as needed.
+5. If the request requires a specialist, the SDK routes the call to the correct department with a warm handoff. Otherwise, the agent logs the interaction and closes the call.
+
+This technical flow follows the same structure as every other solution in the portfolio. Only the agent logic and the business systems change per use case, which is why B3Networks can deliver new solutions quickly while keeping the voice and AI foundation consistent.
+
 ### Caller Experience
 
 For known callers, the experience becomes more personalized and efficient.
@@ -131,7 +220,7 @@ This demonstrates that the same voice workflow can support both customer service
 
 ### What B3Networks Delivers With The Telcoflow SDK
 
-This case study highlights how B3Networks can deliver the following through the Telcoflow SDK:
+Through the Telcoflow SDK, B3Networks delivers:
 
 - Caller-aware voice interactions
 - Data-informed call handling
@@ -169,7 +258,7 @@ These outcomes help position the receptionist workflow as both a service upgrade
 
 ### Sales And Marketing Positioning
 
-This case study supports several strong client-facing messages:
+The AI Receptionist Assistant supports several client-facing messages:
 
 - Turn your phone line into a smarter front door
 - Personalize inbound calls without increasing staffing
@@ -181,6 +270,6 @@ This case study supports several strong client-facing messages:
 
 The AI Receptionist Assistant is a strong demonstration of how B3Networks combines the Telcoflow SDK and service delivery expertise to make inbound call handling more intelligent, more personalized, and more efficient.
 
-It is especially effective for marketing and educational purposes because it solves a familiar business challenge in a way that clients can immediately picture in their own operations.
+It solves a familiar business challenge — one every client can immediately picture in their own operations.
 
-This case study is intended as a representative example of what B3Networks can deliver with the Telcoflow SDK and related services. Beyond this scenario, B3Networks can also design and implement additional custom voice, telephony, automation, and workflow use cases based on each client's operational needs.
+This is one of many solutions B3Networks can deliver on the Telcoflow SDK. Beyond this scenario, B3Networks designs and implements custom voice, telephony, automation, and workflow use cases tailored to each client's operational goals.

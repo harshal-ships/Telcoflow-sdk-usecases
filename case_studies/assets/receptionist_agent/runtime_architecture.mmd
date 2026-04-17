@@ -1,0 +1,15 @@
+flowchart LR
+    Caller((Caller)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Receptionist Agent Logic]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Customer Records<br/>Open Tickets - Department Routing)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Identify - Lookup - Route| Systems

@@ -1,0 +1,42 @@
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Support Systems
+    participant H as Human Agent
+
+    C->>SDK: Dials the support line
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    loop AI handles the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Forward audio with context
+        Note over AI: Understands request<br/>Tracks conversation memory
+
+        opt Needs reference information
+            AI->>AGT: Look up knowledge
+            AGT->>SYS: Query knowledge base
+            SYS-->>AGT: Relevant info
+            AGT-->>AI: Share info
+        end
+
+        AI-->>AGT: Voice reply
+        AGT->>SDK: Play reply
+        SDK-->>C: Caller hears reply
+    end
+
+    alt AI can resolve the request
+        AI-->>AGT: Resolution complete
+        AGT->>SDK: Polite close
+        SDK-->>C: Call ends
+    else Needs human help
+        AGT->>SYS: Save full conversation context
+        AGT->>SDK: Transfer call to human agent
+        SDK-->>H: Human agent receives call
+        SYS-->>H: Context delivered to human agent
+        H-->>C: Human continues with full context
+    end

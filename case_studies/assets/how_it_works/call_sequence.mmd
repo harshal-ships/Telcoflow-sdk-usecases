@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant C as Caller
+    participant SDK as Telcoflow SDK
+    participant AGT as Agent Logic
+    participant AI as AI Model
+    participant SYS as Business Systems
+
+    C->>SDK: Dials the phone number
+    SDK->>AGT: Incoming call event
+    AGT->>SDK: Answer call
+    SDK-->>C: Call connected
+
+    loop Throughout the conversation
+        C->>SDK: Caller speaks
+        SDK->>AGT: Live audio stream
+        AGT->>AI: Send audio with conversation context
+        Note over AI: Understands the caller<br/>Uses running memory of the call
+        opt If information or action is needed
+            AI->>AGT: Request data or action
+            AGT->>SYS: Lookup or update
+            SYS-->>AGT: Result
+            AGT-->>AI: Share result
+        end
+        AI-->>AGT: Generated voice response
+        AGT->>SDK: Play response
+        SDK-->>C: Caller hears the reply
+    end
+
+    C->>SDK: Call ends
+    SDK->>AGT: Call terminated event
+    AGT->>SYS: Save transcript and summary

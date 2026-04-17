@@ -1,0 +1,15 @@
+flowchart LR
+    Candidate((Candidate)) <-->|Voice Call| PSTN[Telephony Network]
+    PSTN <-->|Audio| SDK
+
+    subgraph Backend[B3Networks Backend]
+        direction TB
+        SDK[Telcoflow SDK<br/>Real-Time Voice Layer]
+        Logic[Screening Agent Logic<br/>Structured Interview Flow]
+        AI[AI Model LLM<br/>with Conversation Memory]
+        Systems[(Candidate Responses<br/>Evaluation Pipeline - Recruiter Results)]
+    end
+
+    SDK <-->|Live Audio Stream| Logic
+    Logic <-->|Realtime Audio| AI
+    Logic <-->|Capture - Evaluate - Report| Systems
